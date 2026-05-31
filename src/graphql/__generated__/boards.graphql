@@ -1,0 +1,32 @@
+query GetBoards {
+  boards(order_by: { position: asc }) {
+    id
+    name
+    position
+  }
+}
+
+mutation CreateBoard($name: String!, $position: numeric!) {
+  insert_boards_one(object: { name: $name, position: $position }) {
+    id
+    name
+    position
+  }
+}
+
+mutation UpdateBoard($id: uuid!, $name: String!, $position: numeric!) {
+  update_boards_by_pk(
+    pk_columns: { id: $id }
+    _set: { name: $name, position: $position }
+  ) {
+    id
+    name
+    position
+  }
+}
+
+mutation DeleteBoard($id: uuid!) {
+  delete_boards_by_pk(id: $id) {
+    id
+  }
+}

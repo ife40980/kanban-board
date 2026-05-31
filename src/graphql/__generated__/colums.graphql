@@ -1,0 +1,21 @@
+query GetColumns($boardId: uuid!) {
+  columns(
+    where: { board_id: { _eq: $boardId } }
+    order_by: { position: asc }
+  ) {
+    id
+    name
+    position
+    board_id
+  }
+}
+
+mutation CreateColumn($boardId: uuid!, $name: String!, $position: numeric!) {
+  insert_columns_one(
+    object: { board_id: $boardId, name: $name, position: $position }
+  ) {
+    id
+    name
+    position
+  }
+}
